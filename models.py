@@ -14,7 +14,7 @@ db = SQLAlchemy()
 setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
-def setup_db(app):
+def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
@@ -41,7 +41,6 @@ class Actor(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     age = Column(Integer)
-    birthday = Column(DateTime)
     gender = Column(String)
 
     def __init__(self, name, age, gender):
