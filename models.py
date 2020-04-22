@@ -1,12 +1,13 @@
 import os
+import datetime
 from sqlalchemy import Column, String, Integer, DateTime, create_engine
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import json
 
-# database_name = "castency"
-# database_path = "postgres://{}/{}".format('localhost:5432', database_name)
-database_path = os.environ['DATABASE_URL']
+database_name = "castency"
+database_path = "postgres://{}/{}".format('localhost:5432', database_name)
+# database_path = os.environ['DATABASE_URL']
 
 db = SQLAlchemy()
 
@@ -86,7 +87,7 @@ class Movie(db.Model):
         return {
         'id': self.id,
         'title': self.title,
-        'release_date': self.release_date }
+        'release_date': self.release_date.strftime("%x") }
 	
     def insert(self):
         db.session.add(self)
