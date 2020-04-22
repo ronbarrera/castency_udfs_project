@@ -20,7 +20,8 @@ def create_app(test_config=None):
 	#  Actor
 	#  ----------------------------------------------------------------
 	@app.route('/actors')
-	def get_actors():
+	@requires_auth('get:actors')
+	def get_actors(jwt):
 		actors = Actor.query.all()
 		formatted_actors = [actor.format() for actor in actors]
 		return jsonify({
@@ -30,7 +31,8 @@ def create_app(test_config=None):
 		})
 	
 	@app.route('/actors', methods=['POST'])
-	def create_actor():
+	@requires_auth('post:actors')
+	def create_actor(jwt):
 		try: 
 			body = request.get_json()
 			name = body.get('name')
@@ -46,7 +48,8 @@ def create_app(test_config=None):
 			abort(422)
 	
 	@app.route('/actors/<int:actor_id>', methods=['DELETE'])
-	def delete_actor(actor_id):
+	@requires_auth('delete:actors')
+	def delete_actor(jwt, actor_id):
 		try:
 			actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
 			if actor is None:
@@ -60,7 +63,8 @@ def create_app(test_config=None):
 			abort(422)
 
 	@app.route('/actors/<int:actor_id>', methods=['PATCH'])
-	def update_actor(actor_id):
+	@requires_auth('patch:actors')
+	def update_actor(jwt, actor_id):
 		try: 
 			actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
 			if actor is None: 
@@ -80,7 +84,8 @@ def create_app(test_config=None):
 	#  Movie
 	#  ----------------------------------------------------------------
 	@app.route('/movies')
-	def get_movies():
+	@requires_auth('get:movies')
+	def get_movies(jwt):
 		movies = Movie.query.all()
 		formatted_movies = [movie.format() for movie in movies]
 		return jsonify({
@@ -90,7 +95,8 @@ def create_app(test_config=None):
 		})
 
 	@app.route('/movies', methods=['POST'])
-	def create_movie():
+	@requires_auth('post:movies')
+	def create_movie(jwt):
 		try: 
 			body = request.get_json()
 			title = body.get('title')
@@ -104,7 +110,8 @@ def create_app(test_config=None):
 			abort(422)
 
 	@app.route('/movies/<int:movie_id>', methods=['DELETE'])
-	def delete_movie(movie_id):
+	@requires_auth('delete:movies')
+	def delete_movie(jwt, movie_id):
 		try:
 			movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
 			if movie is None: 
@@ -118,7 +125,8 @@ def create_app(test_config=None):
 			abort(422)
 
 	@app.route('/movies/<int:movie_id>', methods=['PATCH'])
-	def update_movie(movie_id):
+	@requires_auth('patch:movies')
+	def update_movie(jwt, movie_id):
 		try:
 			movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
 			if movie is None: 
