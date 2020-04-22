@@ -1,11 +1,12 @@
 import os
 from sqlalchemy import Column, String, Integer, DateTime, create_engine
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 import json
 
-# database_name = "castency"
-# database_path = "postgres://{}/{}".format('localhost:5432', database_name)
-database_path = os.environ['DATABASE_URL']
+database_name = "castency"
+database_path = "postgres://{}/{}".format('localhost:5432', database_name)
+# database_path = os.environ['DATABASE_URL']
 
 db = SQLAlchemy()
 
@@ -40,6 +41,7 @@ class Actor(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     age = Column(Integer)
+    birthday = Column(DateTime)
     gender = Column(String)
 
     def __init__(self, name, age, gender):
