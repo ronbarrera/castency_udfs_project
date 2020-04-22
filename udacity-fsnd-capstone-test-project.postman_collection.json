@@ -1,0 +1,1118 @@
+{
+	"info": {
+		"_postman_id": "0426a144-353c-4579-8772-c2c5eb7bea4e",
+		"name": "udacity-fsnd-capstone-test-project",
+		"description": "App Name: Castency\nDescription: postman collection to test role-based access control. \nRoles:\n\t- Casting Assistant\n\t\t- Can view actors and movies\n\t- Casting Director\n\t\t- All permissions a Casting Assistant has and…\n\t\t- Add or delete an actor from the database\n\t\t- Modify actors or movies\n\t- Executive Producer\n\t\t- All permissions a Casting Director has and…\n\t\t- Add or delete a movie from the database",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Casting Assistant",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6524f389-8cce-455b-ac1d-7ae52ecd0d73",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains actors array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.actors).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/actors",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "get actors"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6524f389-8cce-455b-ac1d-7ae52ecd0d73",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains movies array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.movies).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/movies",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "get movies\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7eacd376-66e9-4b42-8e40-97593d34e409",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Rhea Seehorn\",\n    \"age\": 47,\n    \"gender\": \"Female\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/actors",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "post a new actor"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7eacd376-66e9-4b42-8e40-97593d34e409",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Inception\",\n    \"release_date\": \"4/22/20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/movies",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "post a new movie\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/actor/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c080c16c-dd86-4211-b2eb-e1e08f91cee9",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/actors/1",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						},
+						"description": "delete actor"
+					},
+					"response": []
+				},
+				{
+					"name": "/movie/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c080c16c-dd86-4211-b2eb-e1e08f91cee9",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/movies/1",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						},
+						"description": "delete movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/actor/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "21da1a99-e6eb-47ba-b1f3-6075cf661124",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Ronald Barrera\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/actors/1",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						},
+						"description": "update actor "
+					},
+					"response": []
+				},
+				{
+					"name": "/movie/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "21da1a99-e6eb-47ba-b1f3-6075cf661124",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Frida\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/movies/1",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						},
+						"description": "update movie"
+					},
+					"response": []
+				}
+			],
+			"description": "Can view actors and movies",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVWakhNTnd0WW5VXy0yRERPX29DZyJ9.eyJpc3MiOiJodHRwczovL3JvbmFsZGJhcnJlcmEuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVlOTVmOTExMDJkYTdlMGM2MjQ5YzI0OSIsImF1ZCI6ImNhc3RlbmN5IiwiaWF0IjoxNTg3NTM5MTA2LCJleHAiOjE1ODc1NDYzMDYsImF6cCI6ImwzeGZJMjV3ak9ZZm5CVVprT1h3RW55eVFUeWRLRzMwIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyJdfQ.WLPjTUzwPLi7IrSGLzj42en3VxjFogxDgEdnr_tKd9agsSLDt7NCyWxknQJC8YQXtmTlyEBrfdt74W0o0QnnsXhiqqFRJ-tOL8a_HwusjPLgeX_J1sCl5guHb0G3Ohg7-PZBDviV2tngtkFzriFPMyVxDK8PUVMo2eveC1IsJWB3MU4alrjTyo8RkPTp_RToYUoM5WVwkCii_00RQvgPc5_w1MChxxwXMGgQgvh_uguWcLBFlFx-VZrALzE_5gC1CofChCDa95WwgK65lunVRdZZrAdn9wCLIufJQ39Xh9Dz7uuws2mvr93RJrY6fsTQJbWSowG1L7mxVN-rBK6wWA",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2113bbd0-3a2e-4c71-a803-c017af299188",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b4a8fbc-52d3-4260-9bba-e17bfc2cd786",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Casting Director",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6524f389-8cce-455b-ac1d-7ae52ecd0d73",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains actors array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.actors).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/actors",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "get actors"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6524f389-8cce-455b-ac1d-7ae52ecd0d73",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains movies array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.movies).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/movies",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "get movies\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7eacd376-66e9-4b42-8e40-97593d34e409",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Rhea Seehorn\",\n    \"age\": 47,\n    \"gender\": \"Female\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/actors",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "post a new actor"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7eacd376-66e9-4b42-8e40-97593d34e409",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Inception\",\n    \"release_date\": \"4/22/20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/movies",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "post a new movie\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/actor/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c080c16c-dd86-4211-b2eb-e1e08f91cee9",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/actors/1",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						},
+						"description": "delete actor"
+					},
+					"response": []
+				},
+				{
+					"name": "/movie/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c080c16c-dd86-4211-b2eb-e1e08f91cee9",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/movies/1",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						},
+						"description": "delete movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/actor/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "21da1a99-e6eb-47ba-b1f3-6075cf661124",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Ronald Barrera\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/actors/1",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						},
+						"description": "update actor "
+					},
+					"response": []
+				},
+				{
+					"name": "/movie/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "21da1a99-e6eb-47ba-b1f3-6075cf661124",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Frida\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/movies/1",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						},
+						"description": "update movie"
+					},
+					"response": []
+				}
+			],
+			"description": "All permissions a Casting Assistant has and…\nAdd or delete an actor from the database\nModify actors or movies",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVWakhNTnd0WW5VXy0yRERPX29DZyJ9.eyJpc3MiOiJodHRwczovL3JvbmFsZGJhcnJlcmEuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTExOTA4NDM5ODA1MTkwMzA5MTY5IiwiYXVkIjpbImNhc3RlbmN5IiwiaHR0cHM6Ly9yb25hbGRiYXJyZXJhLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1ODc1NDE3MTksImV4cCI6MTU4NzU0ODkxOSwiYXpwIjoibDN4ZkkyNXdqT1lmbkJVWmtPWHdFbnl5UVR5ZEtHMzAiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.TqlRl30bjw3KCSOR5Lx--FFRqQ6Cjc9_0G_knwIy34ioAaAT6aO5ICqb9becxwFJ0gSxapWGuCtY_AWoa-BkzQYSRYPAiS1horvIPC7Z8fz8V9RjSt28HU3F_TjC4rANqazuLvYI57sMexK3lZVwkZhefYaDXX8NL99qrewTJFaYDXz7PpSU85NCJTMHdt0RclWjFmkVb5xpTnWuEavwctdCqOHxdu8L2YfxhO5G5yeUiIw5lVoIxIuOpdgaKuP8kDIJoQ2PuHum_TBELJoNoF89W0pZM4UOtvWyr-QIeqUmj7158mPca7S-BEAfnrGiXY7T9RZSIU6ilZjj9TYTkg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2113bbd0-3a2e-4c71-a803-c017af299188",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b4a8fbc-52d3-4260-9bba-e17bfc2cd786",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Executive Producer",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6524f389-8cce-455b-ac1d-7ae52ecd0d73",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains actors array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.actors).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/actors",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "get actors"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6524f389-8cce-455b-ac1d-7ae52ecd0d73",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains movies array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.movies).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/movies",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "get movies\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7eacd376-66e9-4b42-8e40-97593d34e409",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Rhea Seehorn\",\n    \"age\": 47,\n    \"gender\": \"Female\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/actors",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "post a new actor"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7eacd376-66e9-4b42-8e40-97593d34e409",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Inception\",\n    \"release_date\": \"4/22/20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/movies",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "post a new movie\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/actor/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c080c16c-dd86-4211-b2eb-e1e08f91cee9",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/actors/1",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						},
+						"description": "delete actor"
+					},
+					"response": []
+				},
+				{
+					"name": "/movie/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c080c16c-dd86-4211-b2eb-e1e08f91cee9",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/movies/1",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						},
+						"description": "delete movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/actor/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "21da1a99-e6eb-47ba-b1f3-6075cf661124",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Ronald Barrera\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/actors/1",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						},
+						"description": "update actor "
+					},
+					"response": []
+				},
+				{
+					"name": "/movie/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "21da1a99-e6eb-47ba-b1f3-6075cf661124",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Frida\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-udfs.herokuapp.com/movies/1",
+							"protocol": "https",
+							"host": [
+								"casting-agency-udfs",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						},
+						"description": "update movie"
+					},
+					"response": []
+				}
+			],
+			"description": "All permissions a Casting Director has and…\nAdd or delete a movie from the database",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVWakhNTnd0WW5VXy0yRERPX29DZyJ9.eyJpc3MiOiJodHRwczovL3JvbmFsZGJhcnJlcmEuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTEwNjE1OTI3NjM5Njg1MDA1MTgyIiwiYXVkIjpbImNhc3RlbmN5IiwiaHR0cHM6Ly9yb25hbGRiYXJyZXJhLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1ODc1Mzg1MjEsImV4cCI6MTU4NzU0NTcyMSwiYXpwIjoibDN4ZkkyNXdqT1lmbkJVWmtPWHdFbnl5UVR5ZEtHMzAiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDptb3ZpZXMiXX0.Y8haa-MqaIyTydQ2yYS-Ds_MyXWZFb21ysSh9eqQm2LAp7oCOW80fPAhR0xBuS-rbZnobKKnIQLiVB-i-Fc_lVIiSsDd1G2E7XxnToG3OulpWZYoh3CyjTrKiNfoJQGoCxLD-yrP6rz_Sn7FisBxMqhbzmIYNPSEsAiwSM_axtnIziGzVMvTx-UfyQY_4kVD8aUvt5WDIO8F5qrhyVWR3p-Dqi-d9vNlZlG0cFdVwKsbVnJtWGJbinp_6KH4PJ6nclsIeQvxjD8oFlTCo-tPse6nJ94uxFvibdGiEUsj_1FjLGyi_i8nXBTftb8uc0UaKw0ZfYP8_99oCbhGdzmMcA",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2113bbd0-3a2e-4c71-a803-c017af299188",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b4a8fbc-52d3-4260-9bba-e17bfc2cd786",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
